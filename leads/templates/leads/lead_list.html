@@ -71,7 +71,10 @@
                 <h1 class="crm-title">Chaudhary CRM</h1>
                 <div class="user-info mt-2 mt-md-0">
                     Welcome, {{ request.user.name }}
-                    <a href="{% url 'logout' %}" class="btn btn-light ms-3">Logout</a>
+                    <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-light ms-3">Logout</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -83,6 +86,9 @@
                 <span class="badge bg-secondary" id="view-mode-label">Table View</span>
             </h2>
             <div>
+                {% if request.user.is_superuser %}
+                <a href="/user-management/" class="btn btn-dark me-2">User Management</a>
+                {% endif %}
                 <button id="toggle-view" class="btn btn-warning me-2">Switch to Kanban</button>
                 <a href="{% url 'lead-create' %}" class="btn btn-primary">Add New Lead</a>
             </div>

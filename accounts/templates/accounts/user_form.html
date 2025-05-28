@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="container mt-4">
-        <h2 class="mb-4">Add User</h2>
+        <h2 class="mb-4">{% if is_edit %}Edit User{% else %}Add User{% endif %}</h2>
         <form method="post">
             {% csrf_token %}
             {% if form.errors %}
@@ -35,7 +35,7 @@
                 <label for="id_password2" class="form-label">Confirm Password</label>
                 {{ form.password2 }}
             </div>
-            <button type="submit" class="btn btn-primary">Add User</button>
+            <button type="submit" class="btn btn-primary">{% if is_edit %}Update{% else %}Add User{% endif %}</button>
             <a href="{% url 'user-list' %}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
